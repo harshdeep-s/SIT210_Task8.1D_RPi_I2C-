@@ -1,14 +1,14 @@
-import smbus  # smbus library is used 
-import time  # time library is also imported here 
-bus = smbus.SMBus (1) # object of smbus library is created here to access i2c based functions
+import smbus  						# smbus library is used 
+import time  						# time library is also imported here 
+bus = smbus.SMBus (1)					# object of smbus library is created here to access i2c based functions
 def light ():
 	address = bus.read_i2c_block_data (0x23, 0x23)  # here address variable will store the raw data (address) recieved in blocks recieved from sensor
-	value = (address[1] + (256* address [0]))/1.2  # here raw data recieved is converted into real data (as data is stored in first two index of address,
-													#                                                   so we are fetching using adress[0] and adress[1])
-	return value							# value stored in variable will be returned by function light()
+	value = (address[1] + (256* address [0]))/1.2  	# here raw data recieved is converted into real data (as data is stored in first two index of address,
+							# 				so we are fetching using adress[0] and adress[1])
+	return value					# value stored in variable will be returned by function light()
 
 while(True):
-	lux = light ()			# here lux is storing the value returned by light() function
+	lux = light ()					# here lux is storing the value returned by light() function
 	
 	if (lux < 10):					# if lux is smaller than 10 then print, too dark
 		print ("too dark")
